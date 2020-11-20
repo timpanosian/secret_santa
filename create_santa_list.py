@@ -20,6 +20,10 @@ def match_santas(santas:List)-> List[Tuple[str,str]]:
         recip = random.choice(receivers)
         while santa == recip:
             recip = random.choice(receivers)
+            if santa == recip and len(recip)==1:
+                print(f"Unable to find a match for {santa}")
+                recip=""
+                break
         matched_pairs.append(santa, recip)
         _ = receivers.pop(recip)
     return matched_pairs
