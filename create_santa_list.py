@@ -54,11 +54,13 @@ def write_output(matched_pairs:List) -> str:
     outstr+=[','.join(x) for x in outlist]
     return '\n'.join(outstr)
 
+
 def main():
     args = get_args()
     names = read_input(args.infile)
     matches = match_santas(names)
     print(write_output(matches))
+
 
 if __name__ == "__main__":
     main()
