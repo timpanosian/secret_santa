@@ -41,6 +41,7 @@ def match_santas(santas:List[Tuple])-> List[Tuple[Tuple,Tuple]]:
             if not max_count_reached:
                 matched_pairs.append([santa, recip])
                 _ = receivers.pop(receivers.index(recip))
+            if len(matched_pairs)==len(santas):
                 solution = True
     return matched_pairs
 
