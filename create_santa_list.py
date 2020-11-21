@@ -25,15 +25,23 @@ def match_santas(santas:List[Tuple])-> List[Tuple[Tuple,Tuple]]:
         matched_pairs = []
         for santa in santas:
             recip = random.choice(receivers)
+            counter = 0
+            max_count_reached = False
             while santa == recip or santa[1] == recip[1]:
                 recip = random.choice(receivers)
                 if len(recip)==1:
                     print(f"Unable to find a match for {santa}")
-                    recip=""
+                    recip=("","")
                     break
-            matched_pairs.append([santa, recip])
-            _ = receivers.pop(receivers.index(recip))
-            solution = True
+                counter += 1
+                if counter >= len(receivers):
+                    print(f"Unable to find a match for {santa}")
+                    max_count_reached = True
+                    break
+            if not max_count_reached:
+                matched_pairs.append([santa, recip])
+                _ = receivers.pop(receivers.index(recip))
+                solution = True
     return matched_pairs
 
 
@@ -41,8 +49,8 @@ def write_output(matched_pairs:List) -> str:
     outlist = []
     for x in matched_pairs:
          outlist.append([x[0][0], x[0][1], x[1][0], x[1][1]])
-    #outstr=[['gifter', 'gifter_group', 'receiver', 'receiver_group']]
-    outstr=[','.join(x) for x in outlist]
+    outstr=['gifter,gifter_group,receiver,receiver_group']
+    outstr+=[','.join(x) for x in outlist]
     return '\n'.join(outstr)
 
 def main():
